@@ -10,7 +10,7 @@
     display: inline-block;
     width: 100%;
 
-    :hover {
+    &:hover {
       list-style-type: none;
       background-color: #0084FF;
     }
