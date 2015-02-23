@@ -14,3 +14,13 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function(){
+    if(app != undefined){
+        for(k in app){
+            if(app.hasOwnProperty(k) && app[k].hasOwnProperty('init')){
+                app[k].init();
+            }
+        }
+    }
+});
