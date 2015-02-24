@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   get 'welcome/index'
 
-  resources :games do
-    resources :questions
-  end
+  resources :games
+  
+  resources :questions
   
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')

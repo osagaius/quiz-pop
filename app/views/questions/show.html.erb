@@ -1,19 +1,12 @@
 <p>
-  <strong>Title:</strong>
-  <%= @question.title %>
-</p>
-
-<p>
-  <strong>Text:</strong>
+  <strong>Question:</strong>
   <%= @question.text %>
 </p>
 
-<h2>Comments</h2>
-<%= render @question.comments %>
-
-<h2>Add a comment:</h2>
-<%= render 'comments/form' %>
-
+<p>
+  <strong>Correct Answer:</strong>
+  <%= @question.correct_answer %>
+</p>
 
 <%= link_to 'Edit question', edit_question_path(@question) %> |
 <%= link_to 'Back to questions', questions_path %>
