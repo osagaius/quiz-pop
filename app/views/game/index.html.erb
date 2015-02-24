@@ -1,0 +1,13 @@
+<h1>Listing games</h1>
+ 
+<table>
+  <tr>
+    <th>Completed</th>
+  </tr>
+ 
+  <% @games.each do |game| %>
+    <tr>
+      <td><%= game.completed %></td>
+    </tr>
+  <% end %>
+</table>
