@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
 	def index
-    	@games = Article.all
+    	@games = Game.all
   	end
 
 	def create
