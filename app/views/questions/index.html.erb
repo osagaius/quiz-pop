@@ -1,26 +1,26 @@
 <% if current_user %>
-  <h1>Listing questions</h1>
-  <%= link_to 'New question', new_question_path %>
-  <table>
-    <tr>
-      <th>Question</th>
-      <th>Corect Answer</th>
-      <th colspan="3"></th>
-    </tr>
+<h1>Listing questions</h1>
+<%= link_to 'New question', new_question_path %>
+<table>
+  <tr>
+    <th>Question</th>
+    <th>Corect Answer</th>
+    <th colspan="5"></th>
+  </tr>
 
-    <% @questions.each do |question| %>
-        <tr>
-          <td><%= question.text %></td>
-          <td><%= question.correct_answer %></td>
-          <td><%= link_to 'Show', question_path(question) %></td>
-        </tr>
-    <% end %>
-  </table>
- 
+  <% @questions.each do |question| %>
+  <tr>
+    <td><%= question.text %></td>
+    <td><%= question.correct_answer %></td>
+    <td><%= link_to 'Show', question_path(question) %></td>
+  </tr>
+  <% end %>
+</table>
+
 <% else %>
-  <div class="panel">
-    <h1>Create cool questions!</h1>
-    <p>A simple app to create, edit, share your questions with others.</p>
-    <%= link_to "Get started today", new_user_registration_path, :class => "button button-large" %>
-  </div>
+<div class="panel">
+  <h1>Create cool questions!</h1>
+  <p>A simple app to create, edit, share your questions with others.</p>
+  <%= link_to "Get started today", new_user_registration_path, :class => "button button-large" %>
+</div>
 <% end %>
