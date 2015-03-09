@@ -1,0 +1,12 @@
+<p>
+  <h1 class="masthead"><%= @category.title %></h1>
+</p>
+
+<h2>Questions</h2>
+<%= render @category.questions %>
+
+<h2>Add a question:</h2>
+<%= render 'questions/form' %>
+
+<%= link_to 'Back', categories_path %> |
+<%= link_to 'Edit', edit_category_path(@category) %>

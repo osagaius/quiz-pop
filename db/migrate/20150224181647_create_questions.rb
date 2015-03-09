@@ -8,6 +8,7 @@ class CreateQuestions < ActiveRecord::Migration
       t.string :wrong_answer_2
       t.string :wrong_answer_3
 
+      
       t.timestamps null: false
     end
   end

@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
-	has_many :questions
+	has_many :questions, dependent: :destroy
 	validates :title, presence: true,
 	length: { minimum: 3 }
 

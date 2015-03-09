@@ -1,0 +1,10 @@
+<p>
+  <strong>Question:</strong>
+  <%= question.text %>
+</p>
+
+<p>
+  <%= link_to 'Destroy Question', [question.category, question],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+</p>

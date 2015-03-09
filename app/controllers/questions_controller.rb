@@ -5,11 +5,11 @@
 	  before_action :authenticate_user!, except: [:index, :show]
 
 	  def index
-	    @questions = Question.all
+	  	@questions = Question.all
 	  end
 
 	  def show
-	    @question = Question.find(params[:id])
+	  	@question = Question.find(params[:id])
 	  end
 
 	  def new
@@ -17,39 +17,35 @@
 	  end
 
 	  def create
-	    @question = Question.new(question_params)
-
-	    if @question.save
-	      redirect_to @question
-	    else
-	      render 'new'
-	    end
+	  	@category = Category.find(params[:category_id])
+	  	@question = @category.questions.create(question_params)
+	  	redirect_to category_path(@category)
 	  end
 
 	  def update
-	    @question = Question.find(params[:id])
+	  	@question = Question.find(params[:id])
 
-	    if @question.update(question_params)
-	      redirect_to @question
-	    else
-	      render 'edit'
-	    end
+	  	if @question.update(question_params)
+	  		redirect_to @question
+	  	else
+	  		render 'edit'
+	  	end
 	  end
 
 	  def edit
-	    @question = Question.find(params[:id])
+	  	@question = Question.find(params[:id])
 	  end
 
 	  def destroy
-	    @question = Question.find(params[:id])
-	    @question.destroy
-
-	    redirect_to questions_path
+	  	@category = Category.find(params[:category_id])
+	  	@question = @category.questions.find(params[:id])
+	  	@question.destroy
+	  	redirect_to category_path(@category)
 	  end
 
 	  private
-	    def question_params
-	      params.require(:question).permit(:text, :difficulty, :correct_answer, 
-	      	:wrong_answer_1,:wrong_answer_2, :wrong_answer_3)
-	    end
+	  def question_params
+	  	params.require(:question).permit(:text, :difficulty, :correct_answer, 
+	  		:wrong_answer_1,:wrong_answer_2, :wrong_answer_3)
+	  end
 	end

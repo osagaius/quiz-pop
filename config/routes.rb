@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   
   resources :quizzes
 
-  resources :questions
-  
+  resources :categories do
+    resources :questions
+  end
+
   match 'verify', to: 'quizzes#verify', via: :get
   
   get 'auth/:provider/callback', to: 'sessions#create'
