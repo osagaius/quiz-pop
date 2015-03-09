@@ -4,7 +4,11 @@ Rails.application.routes.draw do
 
   resources :games
   
+  resources :quizzes
+
   resources :questions
+  
+  match 'search', to: 'quizzes#search', via: :get
   
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
