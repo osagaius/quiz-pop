@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :questions
   
-  match 'search', to: 'quizzes#search', via: :get
+  match 'verify', to: 'quizzes#verify', via: :get
   
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')

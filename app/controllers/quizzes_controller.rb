@@ -5,7 +5,7 @@ class QuizzesController < ApplicationController
 		@@question = @question
 	end
 
-	def search
+	def verify
 		@data = params[:choice]
 		@question = @@question
 	end

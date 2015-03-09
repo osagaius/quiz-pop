@@ -1,0 +1,11 @@
+<h1>Question: <%= @question.text %></h1>
+
+<% if @data == @question.correct_answer %>
+<h2>You chose the right answer</h2>
+
+
+<% else %>
+<h2>You did not choose the right answer</h2>
+<% end %>
+
+<%= link_to 'Back', quizzes_path %>
