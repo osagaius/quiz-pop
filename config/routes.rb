@@ -3,6 +3,15 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   resources :games
+  
+  resources :quizzes
+
+  resources :categories do
+    resources :questions
+  end
+
+  match 'verify', to: 'quizzes#verify', via: :get
+  
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'

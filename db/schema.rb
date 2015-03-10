@@ -11,16 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150224013251) do
+ActiveRecord::Schema.define(version: 20150309040557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "games", force: :cascade do |t|
     t.boolean  "complete"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "questions", force: :cascade do |t|
+    t.string   "difficulty"
+    t.string   "text"
+    t.string   "correct_answer"
+    t.string   "wrong_answer_1"
+    t.string   "wrong_answer_2"
+    t.string   "wrong_answer_3"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "category_id"
+  end
+
+  add_index "questions", ["category_id"], name: "index_questions_on_category_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -44,4 +64,5 @@ ActiveRecord::Schema.define(version: 20150224013251) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
+  add_foreign_key "questions", "categories"
 end

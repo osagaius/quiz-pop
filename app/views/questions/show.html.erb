@@ -1,0 +1,30 @@
+<p>
+	<strong>Question:</strong>
+	<%= @question.text %>
+</p>
+
+<%= form_for @question do |f| %>
+<p>
+	<%= radio_button_tag(:choice, @question.correct_answer) %>
+	<%= label_tag(:text, @question.correct_answer) %>
+</p>
+
+<p>
+	<%= radio_button_tag(:choice, @question.wrong_answer_1) %>
+	<%= label_tag(:wrong_answer_1, @question.wrong_answer_1) %>
+</p>
+
+<p>
+	<%= radio_button_tag(:choice, @question.wrong_answer_2) %>
+	<%= label_tag(:wrong_answer_2, @question.wrong_answer_2) %>
+</p>
+
+<p>
+	<%= radio_button_tag(:choice, @question.wrong_answer_3) %>
+	<%= label_tag(:wrong_answer_3, @question.wrong_answer_3) %>
+</p>
+
+<% end %>
+
+<%= link_to 'Edit question', edit_question_path(@question) %> |
+<%= link_to 'Back to questions', questions_path %>
