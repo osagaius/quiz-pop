@@ -2,33 +2,33 @@
 
     <%= render "shared/error_messages", object: f.object %>
 
-    <p>
+    <div class="form-group">
       <%= f.label :question %><br>
-      <%= f.text_field :text %>
-    </p>
+      <%= f.text_field :text, class: "form-control" %>
+    </div>
 
-    <p>
+    <div class="form-group">
       <%= f.label :correct_answer %><br>
-      <%= f.text_area :correct_answer %>
-    </p>
+      <%= f.text_area :correct_answer, class: "form-control" %>
+    </div>
 
-    <p>
+    <div class="form-group">
       <%= f.label :wrong_answer_1 %><br>
-      <%= f.text_area :wrong_answer_1 %>
-    </p>
+      <%= f.text_area :wrong_answer_1, class: "form-control" %>
+    </div>
 
-    <p>
+    <div class="form-group">
       <%= f.label :wrong_answer_2 %><br>
-      <%= f.text_area :wrong_answer_2 %>
-    </p>
+      <%= f.text_area :wrong_answer_2, class: "form-control" %>
+    </div>
 
-    <p>
+    <div class="form-group">
       <%= f.label :wrong_answer_3 %><br>
-      <%= f.text_area :wrong_answer_3 %>
-    </p>
+      <%= f.text_area :wrong_answer_3, class: "form-control" %>
+    </div>
 
-    <p>
-      <%= f.submit %>
-    </p>
+    <div class="form-group">
+      <%= f.submit "Submit Question", class: 'btn btn-success' %>
+    </div>
 
 <% end %>
