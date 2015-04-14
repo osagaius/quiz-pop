@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20150309040557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "adminpack"
 
   create_table "categories", force: :cascade do |t|
     t.string   "title"
