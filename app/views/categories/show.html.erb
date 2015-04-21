@@ -1,14 +1,21 @@
 <div class="new-question">
-<p>
-  <h1 class="masthead"><%= @category.title %></h1>
-</p>
+	<p>
+		<h1 class="masthead"><%= @category.title %></h1>
+		<%= link_to 'Edit Title', edit_category_path(@category) %>
 
-<h2>Questions</h2>
-<%= render @category.questions %>
+	</p>
 
-<h2>Add a question:</h2>
-<%= render 'questions/form' %>
+	<% if current_user.admin? %>
+	<h2>Questions</h2>
+	<%= render @category.questions %>
+	<% end %>
 
-<%= link_to 'Back', categories_path %> |
-<%= link_to 'Edit', edit_category_path(@category) %>
+	<h2>Add a question:</h2>
+	<%= render 'questions/form' %>
+
+	<% if current_user.admin? %>
+	<%= link_to 'Back', categories_path %> |
+	<% else %>
+	<%= link_to 'Back', welcome_index_path %> |
+	<% end %>
 </div>

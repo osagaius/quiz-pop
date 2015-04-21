@@ -1,0 +1,10 @@
+<%= form_for(@category) do |f| %>
+
+    <%= render "shared/error_messages", object: f.object %>
+
+    <div class="form-group">
+      <h2><%= f.label :title %></h2>
+      <%= f.text_field :title %>
+    </div>
+
+<% end %>
