@@ -1,3 +1,28 @@
 // Place all the styles related to the Game controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+/* Sets the background image for the wheel */
+td.the_wheel
+{
+	background-image: url(./wheel_back.png);
+	background-position: center;
+	background-repeat: none;
+}
+
+/* Do some css reset on selected elements */
+h1, p
+{
+	margin: 0;
+}
+
+
+/* Style applied to the spin button once a power has been selected */
+.clickable
+{
+	cursor: pointer;
+}
+
+p.noCanvasMsg
+{
+	color: white;
+}
