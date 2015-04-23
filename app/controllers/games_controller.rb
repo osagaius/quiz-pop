@@ -37,7 +37,7 @@ class GamesController < ApplicationController
 		else
 			@game.winner = @game.player1
 			@game.loser = current_user.id
-			@game.player_1_score = @game.player_1_score + 1
+			@game.player_1_score+=1
 		end
 		@game.save
 		redirect_to welcome_index_path
