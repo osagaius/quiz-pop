@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-	
+
 	def index
 		@games = Game.all
 	end
@@ -29,9 +29,16 @@ class GamesController < ApplicationController
 
 	def destroy
 		@game = Game.find(params[:id])
-		puts @game.id
 		@game.complete = true
-		@game.loser = current_user.id
+		if (current_user.id == @game.player1)
+			@game.winner = @game.player2
+			@game.loser = current_user.id
+			@game.player_2_score = @game.player_2_score + 1
+		else
+			@game.winner = @game.player1
+			@game.loser = current_user.id
+			@game.player_1_score = @game.player_1_score + 1
+		end
 		@game.save
 		redirect_to welcome_index_path
 	end

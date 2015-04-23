@@ -18,7 +18,7 @@
             <i class="fa fa-square-o fa-stack-2x"></i>
             <i class="fa fa-user fa-stack-1x fa-inverse"></i>
           </span>
-          User Name
+          You vs  . <%= User.find(game.player2).firstname %> (<%= game.player_1_score %> - <%=game.player_2_score %>)
         </div>
         <div class="col-lg-8 col-md-8 col-sm-8" style="text-align: right">
              <%= link_to 'Forfeit', game_path(game), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger" %>
@@ -53,7 +53,7 @@
             <i class="fa fa-square-o fa-stack-2x"></i>
             <i class="fa fa-user fa-stack-1x fa-inverse"></i>
           </span>
-          User Name
+          You vs  . <%= User.find(game.player2).firstname %> (<%= game.player_1_score %> - <%=game.player_2_score %>)
         </div>
         <div class="col-lg-8 col-md-8 col-sm-8" style="text-align: right">
           <span>Completed on <%= game.updated_at.to_s(:due_date) %></span>
