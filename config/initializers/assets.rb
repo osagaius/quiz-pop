@@ -12,4 +12,3 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( welcome.css )
 Rails.application.config.assets.precompile += %w( spinner.js )
 Rails.application.config.assets.precompile += %w( spin_on.png )
-Rails.application.config.assets.precompile += %w( all.js )
