@@ -4,9 +4,13 @@
 
 <ul class="users">
 	<% @users.each do |user| %>
-	<li>
-		<%= link_to user.username %>
-	</li>
+		<% if user.firstname.to_s.length > 1 %>
+			<%= link_to do %>
+				<span><%= user.firstname %> <%= user.firstname %><span/>
+			<% end %>
+			<br/>
+		<% end %>
+
 	<% end %>
 </ul>
 
