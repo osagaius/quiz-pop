@@ -6,6 +6,8 @@ class GamesController < ApplicationController
 
 	def create
 		@game = Game.new(game_params)
+		@game.turn = current_user.id.to_s
+		@game.complete = false
 
 		if @game.save
 			redirect_to welcome_index_path

@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
   attr_accessor :login
+  attr_accessor :games
+
 
   def self.find_first_by_auth_conditions(warden_conditions)
   	conditions = warden_conditions.dup
@@ -42,6 +44,12 @@ class User < ActiveRecord::Base
   def get_full_name
     firstname + " " + lastname
   end
+
+  def games
+    @games = Game.where(:player1 => self.id, :player2 => self.id)
+    puts @games
+  end
+
 
   validates :username,
   :presence => true,

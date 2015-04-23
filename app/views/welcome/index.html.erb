@@ -1,55 +1,76 @@
+<div class="dashboard">
 
-  <div class="dashboard">
-      
-      <%= render 'sidepanel' %>
+  <%= render 'sidepanel' %>
 
-      <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
-        
-        <%= button_to 'New Game +', new_game_path, :class => "btn btn-success", :method => :get %>
-        <h1>Ongoing</h1>
-        <div class="game-list">
-         <div class="game-entry">
-            <div class="col-lg-4 col-md-4 col-sm-4">
-                <span class="fa-stack fa-lg">
-                    <i class="fa fa-square-o fa-stack-2x"></i>
-                    <i class="fa fa-user fa-stack-1x fa-inverse"></i>
-                </span>
-                User Name
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-8" style="text-align: right">
-              <a class="btn btn-danger" href="#">
-                <i class="fa fa-trash pull-left"></i> Forfeit
-              </a>
-              <a class="btn btn-warning" href="#">
-                <i class="fa fa-bar-chart pull-left"></i> Stats
-              </a>
-              <a class="btn btn-success" href="#">
-                <i class="fa fa-play pull-left"></i> Play
-              </a>
-            </div>
-         </div>
-          <div class="game-entry">
-            <div class="col-lg-4 col-md-4 col-sm-4">
-                <span class="fa-stack fa-lg">
-                    <i class="fa fa-square-o fa-stack-2x"></i>
-                    <i class="fa fa-user fa-stack-1x fa-inverse"></i>
-                </span>
-              User Name
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-8" style="text-align: right">
-              <a class="btn btn-danger" href="#">
-                <i class="fa fa-trash pull-left"></i> Forfeit
-              </a>
-              <a class="btn btn-warning" href="#">
-                <i class="fa fa-bar-chart pull-left"></i> Stats
-              </a>
-              <a class="btn btn-default" href="#" aria-disabled="true">
-                <i class="fa fa-clock-o pull-left"></i> Opponents Turn
-              </a>
-            </div>
-          </div>
+
+  <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+    <%= button_to 'New Game +', new_game_path, :class => "btn btn-success", :method => :get %>
+
+    
+    <h1>Ongoing</h1>
+    <!-- Display list of uncompleted games -->
+    <% @incomplete.each do |game| %>
+    
+    <div class="game-list">
+      <div class="game-entry">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-square-o fa-stack-2x"></i>
+            <i class="fa fa-user fa-stack-1x fa-inverse"></i>
+          </span>
+          User Name
         </div>
-        <h1>Completed</h1>
-        No Games Finished!
+        <div class="col-lg-8 col-md-8 col-sm-8" style="text-align: right">
+          <a class="btn btn-danger" href="#">
+            <i class="fa fa-trash pull-left"></i> Forfeit
+          </a>
+          <a class="btn btn-warning" href="#">
+            <i class="fa fa-bar-chart pull-left"></i> Stats
+          </a>
+
+          <% if game.turn == 3 %>
+            <a class="btn btn-success" href="#">
+              <i class="fa fa-play pull-left"></i> Play
+            </a>
+          <% else %>
+            <a class="btn btn-default" href="#" aria-disabled="true">
+              <i class="fa fa-clock-o pull-left" disabled></i> Opponents Turn
+            </a>
+          <% end %>
+        </div>
+
       </div>
+    </div>
+    <br/>
+    <% end %>
+
+    <h1>Completed</h1>
+    <!-- Display list of completed games -->
+    <% @complete.each do |game| %>
+    
+    <div class="game-list">
+      
+      <div class="game-entry">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-square-o fa-stack-2x"></i>
+            <i class="fa fa-user fa-stack-1x fa-inverse"></i>
+          </span>
+          User Name
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-8" style="text-align: right">
+          <a class="btn btn-warning" href="#">
+            <i class="fa fa-bar-chart pull-left"></i> Stats
+          </a>
+        </div>
+
+      </div>
+    </div>
+    <br/>
+    <% end %>
+
+
+
+
   </div>
+</div>
