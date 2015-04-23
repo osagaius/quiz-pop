@@ -27,10 +27,8 @@
             <i class="fa fa-bar-chart pull-left"></i> Stats
           </a>
 
-          <% if game.turn == 3 %>
-            <a class="btn btn-success" href="#">
-              <i class="fa fa-play pull-left"></i> Play
-            </a>
+          <% if game.turn == current_user.id %>
+            <%= link_to 'Play', game_path(game), :method => :get, :class => "btn btn-success" %>
           <% else %>
             <a class="btn btn-default" href="#" aria-disabled="true">
               <i class="fa fa-clock-o pull-left" disabled></i> Opponents Turn
