@@ -5,9 +5,7 @@
 <ul class="users">
 	<% @users.each do |user| %>
 		<% if user.firstname.to_s.length > 1 %>
-			<%= link_to user.username, games_path(:game => {:player1 => current_user.id, :player2 => user.id}) , :method => :post %>
-
-				<span><%= user.firstname %> <%= user.firstname %><span/>
+			<%= link_to user.get_full_name, games_path(:game => {:player1 => current_user.id, :player2 => user.id}) , :method => :post %>
 			<br/>
 		<% end %>
 

@@ -39,6 +39,10 @@ class User < ActiveRecord::Base
     @login || self.username || self.email
   end
   
+  def get_full_name
+    firstname + " " + lastname
+  end
+
   validates :username,
   :presence => true,
   :uniqueness => {
