@@ -8,7 +8,7 @@ class GamesController < ApplicationController
 		@game = Game.new(game_params)
 
 		if @game.save
-			redirect_to @game
+			redirect_to welcome_index_path
 		else
 			render 'new'
 		end
@@ -20,6 +20,7 @@ class GamesController < ApplicationController
 
 
 	def new
+		@game = Game.new
 		WillPaginate.per_page = 10
 		@users = User.paginate(page: params[:page])
 	end

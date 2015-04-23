@@ -5,9 +5,9 @@
 <ul class="users">
 	<% @users.each do |user| %>
 		<% if user.firstname.to_s.length > 1 %>
-			<%= link_to do %>
+			<%= link_to user.username, games_path(:game => {:player1 => current_user.id, :player2 => user.id}) , :method => :post %>
+
 				<span><%= user.firstname %> <%= user.firstname %><span/>
-			<% end %>
 			<br/>
 		<% end %>
 
@@ -16,8 +16,6 @@
 
 <%= will_paginate @users %>
 
+<br/>
+<%= link_to 'Back', welcome_index_path %>
 
-<div class='game'>
-	<%= render 'shared/spinner' %>
-</div>
-<%= link_to 'Back' %>
