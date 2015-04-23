@@ -1,12 +1,12 @@
 class GamesController < ApplicationController
-
+	
 	def index
 		@games = Game.all
 	end
 
 	def create
 		@game = Game.new(game_params)
-		@game.turn = current_user.id.to_s
+		@game.turn = current_user.id
 		@game.complete = false
 
 		if @game.save
@@ -23,8 +23,17 @@ class GamesController < ApplicationController
 
 	def new
 		@game = Game.new
-		WillPaginate.per_page = 10
+		WillPaginate.per_page = 5
 		@users = User.paginate(page: params[:page])
+	end
+
+	def destroy
+		@game = Game.find(params[:id])
+		puts @game.id
+		@game.complete = true
+		@game.loser = current_user.id
+		@game.save
+		redirect_to welcome_index_path
 	end
 
 	private

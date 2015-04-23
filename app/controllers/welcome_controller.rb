@@ -3,7 +3,7 @@ class WelcomeController < ApplicationController
 		@incomplete = []
 		@player_turn = []
 		@opponent_turn = []
-		@complete = []
+		@complete = Game.where(complete: true).order('created_at DESC').take(3)
 
 		Game.where("player1 = ? OR player2 = ?", current_user.id, current_user.id).find_each do |game|
 			if game.complete == false
@@ -14,8 +14,6 @@ class WelcomeController < ApplicationController
 				else
 					@opponent_turn.push(game)
 				end
-			else
-				@complete.push(game)
 			end
 		end
 	end

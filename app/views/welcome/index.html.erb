@@ -1,7 +1,7 @@
 <div class="dashboard">
 
   <%= render 'sidepanel' %>
-
+  <%= javascript_include_tag :all %>
 
   <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
     <%= button_to 'New Game +', new_game_path, :class => "btn btn-success", :method => :get %>
@@ -21,9 +21,8 @@
           User Name
         </div>
         <div class="col-lg-8 col-md-8 col-sm-8" style="text-align: right">
-          <a class="btn btn-danger" href="#">
-            <i class="fa fa-trash pull-left"></i> Forfeit
-          </a>
+             <%= link_to 'Forfeit', game_path(game), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger" %>
+
           <a class="btn btn-warning" href="#">
             <i class="fa fa-bar-chart pull-left"></i> Stats
           </a>
@@ -44,10 +43,10 @@
     <br/>
     <% end %>
 
-    <h1>Completed</h1>
+    <h1>Recent Games</h1>
     <!-- Display list of completed games -->
     <% @complete.each do |game| %>
-    
+
     <div class="game-list">
       
       <div class="game-entry">
@@ -59,6 +58,7 @@
           User Name
         </div>
         <div class="col-lg-8 col-md-8 col-sm-8" style="text-align: right">
+          <span>Completed on <%= game.updated_at.to_s(:due_date) %></span>
           <a class="btn btn-warning" href="#">
             <i class="fa fa-bar-chart pull-left"></i> Stats
           </a>
