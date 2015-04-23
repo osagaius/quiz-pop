@@ -1,4 +1,14 @@
 <h1>New Game</h1>
+
+<h2>All users</h2>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <%= render @users %>
+</ul>
+
+<%= will_paginate %>
 <div class='game'>
 	<%= render 'shared/spinner' %>
 </div>
