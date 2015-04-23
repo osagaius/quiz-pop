@@ -1,14 +1,18 @@
-<h1>New Game</h1>
+<h1>Choose An Opponent</h1>
 
-<h2>All users</h2>
-
-<%= will_paginate %>
+<%= will_paginate @users %>
 
 <ul class="users">
-  <%= render @users %>
+	<% @users.each do |user| %>
+	<li>
+		<%= link_to user.username %>
+	</li>
+	<% end %>
 </ul>
 
-<%= will_paginate %>
+<%= will_paginate @users %>
+
+
 <div class='game'>
 	<%= render 'shared/spinner' %>
 </div>

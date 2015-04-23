@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+
 	def index
 		@games = Game.all
 	end
@@ -19,6 +20,8 @@ class GamesController < ApplicationController
 
 
 	def new
+		WillPaginate.per_page = 10
+		@users = User.paginate(page: params[:page])
 	end
 
 	private
