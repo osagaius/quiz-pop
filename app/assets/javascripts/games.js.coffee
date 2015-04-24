@@ -2,10 +2,3 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-ready = ->
-    $(".submit-btn").click (event) ->
-      event.preventDefault()
-      $("#game").submit()
-
-$(document).ready ready
-$(document).on "page:load", ready

@@ -1,28 +1,9 @@
-<div>
-	<% content_for :javascript_includes do %>
-  		<%= javascript_include_tag "spinner.js.erb" %>
-	<% end %>
+<div class="dashboard">
+	<%= render 'welcome/sidepanel' %>
+
 	<div align="center">
-		<table cellpadding="0" cellspacing="0" border="0">
-			<tr>
-				<td width="438" height="582" class="the_wheel" align="center" valign="center">
-					
-				</td>
-				<td>
-					<a href='#' onclick='startSpin()'><%= image_tag "spin_on.png" %></a>
-					<%= link_to "", :id => 'spin_button' do %>
-					<% end %>
-				</td>
-	
-			</tr>
-		</table>
+		<% render 'spinner' %>
 	</div>
-	<script>
-
-	begin();
-
-	</script>
-<br />
-
-
 </div>
+
+
