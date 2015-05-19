@@ -5,23 +5,25 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.create!(username:  "testing",
-  firstname: "Example",
-  lastname: "User",
-  email: "example@railstutorial.org",
-  password:              "foobar88",
-  password_confirmation: "foobar88")
+Category.create!(title:  "Entertainment")
+Category.create!(title:  "Art")
+Category.create!(title:  "History")
+Category.create!(title:  "Science")
+Category.create!(title:  "Geography")
+Category.create!(title:  "Sports")
 
-99.times do |n|
-  firstname = Faker::Name.first_name
-  lastname = Faker::Name.last_name
-  username  = Faker::Internet.user_name(firstname)
-  email = Faker::Internet.email(firstname)
-  password = "password"
-  User.create!(username:  username,
-    firstname: firstname,
-    lastname: lastname,
-    email: email,
-    password: password,
-    password_confirmation: password)
-end
+Question.create!(difficulty: 1,
+  text: "Who is the current President?",
+  correct_answer: "Obama",
+  wrong_answer_1: "Biden",
+  wrong_answer_2: "Clinton",
+  wrong_answer_3: "Bush",
+  category_id: 3)
+  
+Question.create!(difficulty: 2,
+  text: "What country is Iggy Azalea from?",
+  correct_answer: "Australia",
+  wrong_answer_1: "New Zealand",
+  wrong_answer_2: "Austria",
+  wrong_answer_3: "England",
+  category_id: 1)
