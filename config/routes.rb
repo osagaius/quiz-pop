@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :questions
   end
 
-  match 'verify', to: 'quizzes#verify', via: :get
+  match 'verify', to: 'games#verify', via: :get
   
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')

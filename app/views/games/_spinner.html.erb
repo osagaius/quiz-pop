@@ -152,6 +152,8 @@ var wheel = {
         wheel.angleDelta = 0;
 
         $("#counter").html((wheel.frames / duration * 1000) + " FPS");
+
+        $('#wheel').hide().after('<%= j render("question") %>');
     }
 
 /*

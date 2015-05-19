@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+	@@question = Question.first
 
 	def index
 		@games = Game.all
@@ -9,6 +10,7 @@ class GamesController < ApplicationController
 		@game.turn = current_user.id
 		@game.complete = false
 
+
 		if @game.save
 			redirect_to welcome_index_path
 		else
@@ -18,8 +20,23 @@ class GamesController < ApplicationController
 
 	def show
 		@game = Game.find(params[:id])
+		@question = Question.order_by_rand.where(category: 1).first
+		@@question = @question
 	end
 
+	def verify
+		@data = params[:choice]
+		@question = @@question
+		if @question.correct_answer == @data
+			respond_to do |format|
+				format.js do
+					render js:	"alert('Correct!');"
+				end
+			end
+		else
+			render js: "window.location='#{welcome_index_path}'"
+		end
+	end
 
 	def new
 		@game = Game.new
