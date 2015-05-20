@@ -26,7 +26,7 @@ String.prototype.hashCode = function() {
 Number.prototype.mod = function(n) {
     return ((this % n) + n) % n;
 }
-// List of venues. These are foursquare IDs, with the idea that eventually it'll tie in 
+
 venues = {
     "0": "Entertainment",
     "1": "Art",
@@ -34,7 +34,7 @@ venues = {
     "3": "Science",
     "4": "Geography",
     "5": "Sports",
-    "7": "Crown"
+    "6": "Crown"
 };
 
 $(function() {
@@ -150,8 +150,10 @@ var wheel = {
         wheel.angleDelta = 0;
 
         $("#counter").html((wheel.frames / duration * 1000) + " FPS");
-
-        $('#wheel').hide().after('<%= j render("question") %>');
+        var currentCategory = wheel.segments.length - Math.floor((wheel.angleCurrent / (Math.PI * 2)) * wheel.segments.length) - 1;
+        var str = '<%= j render "new_question", category: 5 %>';
+        str.replace(/5/i, currentCategory + 1)
+        $('#wheel').hide().after(str);
     }
 
 /*

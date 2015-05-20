@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150519012046) do
+ActiveRecord::Schema.define(version: 20150519195908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,15 +48,16 @@ ActiveRecord::Schema.define(version: 20150519012046) do
 
   create_table "games", force: :cascade do |t|
     t.boolean  "complete"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "turn"
     t.integer  "player1"
     t.integer  "player2"
     t.string   "winner"
     t.string   "loser"
-    t.integer  "player_1_score", default: 0
-    t.integer  "player_2_score", default: 0
+    t.integer  "player_1_score",   default: 0
+    t.integer  "player_2_score",   default: 0
+    t.integer  "current_question"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -74,10 +75,11 @@ ActiveRecord::Schema.define(version: 20150519012046) do
   add_index "questions", ["category_id"], name: "index_questions_on_category_id", using: :btree
 
   create_table "quizzes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "category"
     t.integer  "question"
+    t.integer  "current_question"
   end
 
   create_table "rounds", force: :cascade do |t|

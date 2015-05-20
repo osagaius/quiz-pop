@@ -1,6 +1,8 @@
 class GamesController < ApplicationController
 	@@question = Question.first
 
+	helper_method :update_question
+
 	def index
 		@games = Game.all
 	end
@@ -9,7 +11,6 @@ class GamesController < ApplicationController
 		@game = Game.new(game_params)
 		@game.turn = current_user.id
 		@game.complete = false
-
 
 		if @game.save
 			redirect_to welcome_index_path
@@ -20,13 +21,18 @@ class GamesController < ApplicationController
 
 	def show
 		@game = Game.find(params[:id])
-		@question = Question.order_by_rand.where(category: 1).first
-		@@question = @question
+		@game.current_question = Question.order_by_rand.where(category: 1).first
+		@@question = @game.current_question		
+	end
+
+	def new_question
+		@question = Question.order_by_rand.where(category: category).first
+		@@question = @game.current_question	
 	end
 
 	def verify
 		@data = params[:choice]
-		@question = @@question
+		@question = @game.current_question
 		if @question.correct_answer == @data
 			respond_to do |format|
 				format.js do
@@ -34,10 +40,22 @@ class GamesController < ApplicationController
 				end
 			end
 		else
-			render js: "window.location='#{welcome_index_path}'"
 		end
 	end
+	
+	def edit
+		@game = Game.find(params[:id])
+		@question = params[:question]
+	end
 
+	def update
+		@game = Game.find(params[:id])
+		@game.current_question = 
+		if @game.update_attributes(game_params)
+			redirect_to @game
+		end
+	end
+	
 	def new
 		@game = Game.new
 		WillPaginate.per_page = 5
@@ -62,6 +80,6 @@ class GamesController < ApplicationController
 
 	private
 	def game_params
-		params.require(:game).permit(:player1, :player2)
+		params.require(:game).permit(:player1, :player2, :question)
 	end
 end
