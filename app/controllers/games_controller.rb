@@ -1,7 +1,5 @@
 class GamesController < ApplicationController
-	@@question = Question.first
-
-	helper_method :update_question
+	respond_to :html, :json
 
 	def index
 		@games = Game.all
@@ -21,31 +19,34 @@ class GamesController < ApplicationController
 
 	def show
 		@game = Game.find(params[:id])
-		@game.current_question = Question.order_by_rand.where(category: 1).first
-		@@question = @game.current_question		
-	end
-
-	def new_question
-		@question = Question.order_by_rand.where(category: category).first
-		@@question = @game.current_question	
+		@question = Question.first
+		@@question = @question
 	end
 
 	def verify
 		@data = params[:choice]
-		@question = @game.current_question
+		@question = Question.find(params[:question_id])
 		if @question.correct_answer == @data
-			respond_to do |format|
-				format.js do
-					render js:	"alert('Correct!');"
-				end
-			end
+			render json: { message: "Correct" }
 		else
+			render json: { message: "Incorrect" }
 		end
 	end
-	
+
+	def updateQuestion
+		@category = params[:category]
+		@game = Game.find(params[:id])
+		@game.current_category = params[:category]
+		if @game.save
+			render 'question'
+		else
+			render json: { message: "Error changing category", status: :not_found }
+		end
+
+	end
+
 	def edit
 		@game = Game.find(params[:id])
-		@question = params[:question]
 	end
 
 	def update
@@ -55,7 +56,7 @@ class GamesController < ApplicationController
 			redirect_to @game
 		end
 	end
-	
+
 	def new
 		@game = Game.new
 		WillPaginate.per_page = 5

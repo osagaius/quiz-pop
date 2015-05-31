@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/auth" }
   get 'welcome/index'
 
-  resources :games
+  resources :games do 
+    member do
+      get 'updateQuestion'
+    end
+  end
   
   resources :quizzes
 
@@ -12,7 +16,6 @@ Rails.application.routes.draw do
   end
 
   match 'verify', to: 'games#verify', via: :get
-  match 'new_question', to: 'games#new_question', via: :get
   
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
