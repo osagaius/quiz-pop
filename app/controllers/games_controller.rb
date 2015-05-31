@@ -46,10 +46,16 @@ class GamesController < ApplicationController
 		@game = Game.find(params[:game_id])
 		@question = Question.find(params[:question_id])
 		# @question.rating = params[:rating]
-		if params[:correct]
-			render 'show'
+		@path = '/games/' + @game.id.to_s
+		@correct = params[:correct]
+		if @correct === 'true'
+			render js: %(window.location.pathname='#{@path}')
 		else
-			redirect_to welcome_index_path
+			@game.meter = 0
+			@game.save
+			respond_to do |format|
+				format.js
+			end
 		end
 	end
 

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   match 'verify', to: 'games#verify', via: :get
-  match 'feedback', to: 'games#feedback', via: :post
+  match 'feedback', to: 'games#feedback', via: :get
   
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
