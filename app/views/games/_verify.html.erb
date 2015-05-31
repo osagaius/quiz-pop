@@ -1,0 +1,43 @@
+<div class="feedback">
+	<br>
+	<br>
+	<div>
+		<strong>Question:</strong>
+		<%= @question.text %>
+	</div>
+	<div>
+		<strong>Your answer:</strong> 
+		<%= @choice %></p>
+	</div>
+	<div>
+		<% if @choice == @question.correct_answer %>
+		<p>Correct!</p>
+		<% else %>
+		<p>Incorrect</p>
+		<% end %>
+	</div>
+</div>
+
+<div class="rating">
+
+	<%= form_tag("/feedback", method: "get", id: "question", remote: true) do %>
+	<p>
+		Please rate the difficulty of this question.
+	</p>
+	<p style="color:black;">
+		<%= select_tag "rating", options_for_select((1..5).step(1)) %>
+	</p>
+
+	<%= hidden_field_tag :question_id, @question.id %>
+	<%= hidden_field_tag :game_id, @game.id %>
+
+	<% if @choice == @question.correct_answer %>
+	<%= hidden_field_tag :correct, true %>
+	<% else %>
+	<%= hidden_field_tag :correct, false %>
+	<% end %>
+
+	<input type="submit" value="Rate"/>
+
+	<% end %>
+</div>

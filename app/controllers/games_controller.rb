@@ -3,6 +3,7 @@ class GamesController < ApplicationController
 
 	def index
 		@games = Game.all
+		@vis_js = 1
 	end
 
 	def create
@@ -24,12 +25,31 @@ class GamesController < ApplicationController
 	end
 
 	def verify
-		@data = params[:choice]
+		@game = Game.find(params[:game_id])
+		@choice = params[:choice]
 		@question = Question.find(params[:question_id])
-		if @question.correct_answer == @data
-			render json: { message: "Correct" }
+		if @question.correct_answer == @choice
+			if @game.meter >= 3
+				@game.meter = 0
+			end
+			@game.meter += 1
+			@game.save
 		else
-			render json: { message: "Incorrect" }
+			@game.meter = 0
+		end
+		respond_to do |format|
+			format.js
+		end
+	end
+
+	def feedback
+		@game = Game.find(params[:game_id])
+		@question = Question.find(params[:question_id])
+		# @question.rating = params[:rating]
+		if params[:correct]
+			render 'show'
+		else
+			redirect_to welcome_index_path
 		end
 	end
 
@@ -80,6 +100,7 @@ class GamesController < ApplicationController
 	end
 
 	private
+
 	def game_params
 		params.require(:game).permit(:player1, :player2, :question)
 	end
