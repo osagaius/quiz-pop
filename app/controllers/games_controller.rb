@@ -28,15 +28,13 @@ class GamesController < ApplicationController
 		@game = Game.find(params[:game_id])
 		@choice = params[:choice]
 		@question = Question.find(params[:question_id])
+
 		if @question.correct_answer == @choice
-			if @game.meter >= 3
-				@game.meter = 0
-			end
-			@game.meter += 1
-			@game.save
+			increment_meter(@game)
 		else
-			@game.meter = 0
+			reset_meter(@game)
 		end
+
 		respond_to do |format|
 			format.js
 		end
@@ -45,14 +43,17 @@ class GamesController < ApplicationController
 	def feedback
 		@game = Game.find(params[:game_id])
 		@question = Question.find(params[:question_id])
+
 		# @question.rating = params[:rating]
+
 		@path = '/games/' + @game.id.to_s
 		@correct = params[:correct]
+		
 		if @correct === 'true'
 			render js: %(window.location.pathname='#{@path}')
 		else
-			@game.meter = 0
-			@game.save
+			reset_meter(@game)
+			change_turn(@game)
 			respond_to do |format|
 				format.js
 			end
@@ -77,7 +78,7 @@ class GamesController < ApplicationController
 
 	def update
 		@game = Game.find(params[:id])
-		@game.current_question = 
+		
 		if @game.update_attributes(game_params)
 			redirect_to @game
 		end
@@ -106,7 +107,28 @@ class GamesController < ApplicationController
 	end
 
 	private
-
+	def increment_meter(game)
+		puts 'game info'
+		puts game.meter
+		if game.meter >= 3
+			@game.special_mode = true
+			game.meter = 0
+		end
+		game.meter += 1
+		game.save
+	end
+	def reset_meter(game)
+		game.meter = 0
+		game.save
+	end
+	def change_turn(game)
+		if game.player1 == current_user.id
+			game.turn = game.player2
+		else
+			game.turn = game.player1
+		end
+		game.save
+	end
 	def game_params
 		params.require(:game).permit(:player1, :player2, :question)
 	end
