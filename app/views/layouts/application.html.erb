@@ -5,107 +5,107 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="//bootswatch.com/superhero/bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
 </head>
 <body id="home">
-<div class="navbar navbar-default navbar-fixed-top navbar-transparent">
-  <div class="container">
-    <div class="navbar-header">
-      <a href="/" class="navbar-brand">QuizPop</a>
-      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+  <div class="navbar navbar-default navbar-fixed-top navbar-transparent">
+    <div class="container">
+      <div class="navbar-header">
+        <a href="/" class="navbar-brand">QuizPop</a>
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
 
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-    <div class="navbar-collapse collapse" id="navbar-main">
-      <ul class="nav navbar-nav">
-        <!-- main nav -->
-      </ul>
-
-    <% if user_signed_in? %>
-        <ul class="nav navbar-nav navbar-right">
-            <li>Logged in as <strong><%= current_user.username %></strong></li>
-            <li>
-              <button type="button" class="btn btn-primary">
-                <%= link_to 'Edit profile', edit_user_registration_path %>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="btn btn-danger">
-                <%= link_to "Logout", destroy_user_session_path, method: :delete  %>
-              </button>
-            </li>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="navbar-collapse collapse" id="navbar-main">
+        <ul class="nav navbar-nav">
+          <!-- main nav -->
         </ul>
-    <% else %>
+
+        <% if user_signed_in? %>
+        <ul class="nav navbar-nav navbar-right">
+          <li>Logged in as <strong><%= current_user.username %></strong></li>
+          <li>
+            <button type="button" class="btn btn-primary">
+              <%= link_to 'Edit profile', edit_user_registration_path %>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-danger">
+              <%= link_to "Logout", destroy_user_session_path, method: :delete  %>
+            </button>
+          </li>
+        </ul>
+        <% else %>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                  <%= f.text_field :username, placeholder: "Username", class: "form-control", name: "user[login]" %>
-                  <!--input type="text" class="form-control" placeholder="Username"-->
-                </li>
-                <li>
-                  <%= f.password_field :password, autocomplete: "off", placeholder: "Password", class: "form-control" %>
-                  <!--input type="text" class="form-control" placeholder="Password"-->
-                </li>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <%= f.text_field :username, placeholder: "Username", class: "form-control", name: "user[login]" %>
+            <!--input type="text" class="form-control" placeholder="Username"-->
+          </li>
+          <li>
+            <%= f.password_field :password, autocomplete: "off", placeholder: "Password", class: "form-control" %>
+            <!--input type="text" class="form-control" placeholder="Password"-->
+          </li>
 
-                <li>
-                  <%= f.submit "Log in", class: "btn btn-primary" %>
-                </li>
+          <li>
+            <%= f.submit "Log in", class: "btn btn-primary" %>
+          </li>
 
-                <li>
-                  <%= link_to "Sign up", new_user_registration_path, class: "btn btn-success" %>
-                </li>
-            </ul>
+          <li>
+            <%= link_to "Sign up", new_user_registration_path, class: "btn btn-success" %>
+          </li>
+        </ul>
         <% end %>
-    <% end %>
+        <% end %>
 
-      <ul class="nav navbar-nav hidden-sm hidden-md hidden-lg">
-        <li>
-          <a href="#">About</a>
-        </li>
-        <li>
-          <a href="#">Privacy / Terms</a>
-        </li>
-      </ul>
+        <ul class="nav navbar-nav hidden-sm hidden-md hidden-lg">
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Privacy / Terms</a>
+          </li>
+        </ul>
 
+      </div>
     </div>
   </div>
-</div>
 
-<div id="content">
-  <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-  <% end %>
-  <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-  <% end %>
+  <div id="content">
+    <% if notice %>
+    <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+    <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
 
-  <%= yield %>
-</div>
+    <%= yield %>
+  </div>
 
-<script>
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId      : '712396392193089',
-            xfbml      : true,
-            version    : 'v2.2'
-        });
-    };
+  <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '712396392193089',
+      xfbml      : true,
+      version    : 'v2.2'
+    });
+  };
 
-    (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
+  (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+  </script>
 </body>
 
 </html>
