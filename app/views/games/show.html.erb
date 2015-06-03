@@ -10,7 +10,42 @@
     <br>
     <div class="row">
       <div class="col-sm-3">
-        <%= @current_user_pieces %>
+        <% if @current_user_pieces.include?('History') %>
+          <%= image_tag("History-green.png") %>
+        <% else %>
+          <%= image_tag("History-grey.png") %>
+        <% end %>
+
+        <% if @current_user_pieces.include?('Entertainment') %>
+          <%= image_tag("Entertainment-green.png") %>
+        <% else %>
+          <%= image_tag("Entertainment-grey.png") %>
+        <% end %>
+
+        <% if @current_user_pieces.include?('Sports') %>
+          <%= image_tag("Sports-green.png") %>
+        <% else %>
+          <%= image_tag("Sports-grey.png") %>
+        <% end %>
+        <br>
+        <br>
+        <% if @current_user_pieces.include?('Science') %>
+          <%= image_tag("Science-green.png") %>
+        <% else %>
+          <%= image_tag("Science-grey.png") %>
+        <% end %>
+
+        <% if @current_user_pieces.include?('Geography') %>
+          <%= image_tag("Geography-green.png") %>
+        <% else %>
+          <%= image_tag("Geography-grey.png") %>
+        <% end %>
+
+        <% if @current_user_pieces.include?('Art') %>
+          <%= image_tag("Art-green.png") %>
+        <% else %>
+          <%= image_tag("Art-grey.png") %>
+        <% end %>
       </div>
       <div class="col-sm-6" id="main-panel">
         <div class="">
@@ -18,12 +53,47 @@
         </div>
       </div>
       <div class="col-sm-3">
-        <%= @opponent_pieces %>
+        <% if @opponent_pieces.include?('History') %>
+          <%= image_tag("History-green.png") %>
+        <% else %>
+          <%= image_tag("History-grey.png") %>
+        <% end %>
+
+        <% if @opponent_pieces.include?('Entertainment') %>
+          <%= image_tag("Entertainment-green.png") %>
+        <% else %>
+          <%= image_tag("Entertainment-grey.png") %>
+        <% end %>
+
+        <% if @opponent_pieces.include?('Sports') %>
+          <%= image_tag("Sports-green.png") %>
+        <% else %>
+          <%= image_tag("Sports-grey.png") %>
+        <% end %>
+        <br>
+        <br>
+        <% if @opponent_pieces.include?('Science') %>
+          <%= image_tag("Science-green.png") %>
+        <% else %>
+          <%= image_tag("Science-grey.png") %>
+        <% end %>
+
+        <% if @opponent_pieces.include?('Geography') %>
+          <%= image_tag("Geography-green.png") %>
+        <% else %>
+          <%= image_tag("Geography-grey.png") %>
+        <% end %>
+
+        <% if @opponent_pieces.include?('Art') %>
+          <%= image_tag("Art-green.png") %>
+        <% else %>
+          <%= image_tag("Art-grey.png") %>
+        <% end %>
       </div>
     </div>
     <div class="meter">
       <br><br><br><br>
-      <div class="col-sm-10">
+      <div class="col-sm-11">
         <% if !@game.special_mode %>        
         <div class="btn btn-lg btn-success">
           <p class="text-center">Streak: <%= @game.meter %></p>

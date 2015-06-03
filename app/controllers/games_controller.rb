@@ -138,14 +138,17 @@ class GamesController < ApplicationController
 		def setPiece
 			@game = Game.find(params[:game_id])
 			@game.reward = params[:choice]
+			@game.current_category = Category.find_by title: @game.reward
 			@game.save
 			redirect_to_game(@game)
 		end
 
 		def updateQuestion
-			@category = params[:category]
 			@game = Game.find(params[:id])
+			@category = params[:category]
 			@game.current_category = params[:category]
+
+
 			if @game.save
 				respond_to do |format|
 					format.js { render :partial => "question" }
