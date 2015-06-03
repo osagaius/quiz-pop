@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admins
-  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/auth" }
+
   get 'welcome/index'
 
   resources :games do 
