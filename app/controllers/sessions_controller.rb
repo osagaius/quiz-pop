@@ -7,6 +7,10 @@ class SessionsController < ApplicationController
 
 	def destroy
 		session[:user_id] = nil
-		redirect_to root_url
+		respond_to do |format|
+			@path = welcome_index_path
+			format.js { render %(window.location.pathname='#{@path}') }
+		end
+		return
 	end
 end
