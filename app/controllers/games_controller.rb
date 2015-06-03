@@ -1,6 +1,8 @@
 class GamesController < ApplicationController
 	respond_to :html, :json
 
+	CATEGORIES = ['Science', 'Sports', 'Entertainment', 'Geography', 'History', 'Art'].freeze
+
 	def index
 		@games = Game.all
 		@vis_js = 1
@@ -120,9 +122,22 @@ class GamesController < ApplicationController
 			@game = Game.find(params[:game_id])
 			if params[:choice] == 'piece'
 				@game.challenge = false
+				render action: 'choosePiece.js.erb'
+				return
 			else
 				@game.challenge = true
 			end
+			@game.save
+			redirect_to_game(@game)
+		end
+
+		def choosePiece
+			@game = Game.find(params[:game_id])
+		end
+
+		def setPiece
+			@game = Game.find(params[:game_id])
+			@game.reward = params[:choice]
 			@game.save
 			redirect_to_game(@game)
 		end
@@ -210,11 +225,10 @@ class GamesController < ApplicationController
 
 		def add_player_piece(game)
 			@game = Game.find(game.id)
-			@piece = Category.find(game.current_category).title
 			if player1?(game)
-				@game.player_1_pieces += [@piece]
+				@game.player_1_pieces += [@game.reward]
 			else
-				@game.player_2_pieces += [@piece]
+				@game.player_2_pieces += [@game.reward]
 			end
 			@game.save
 		end

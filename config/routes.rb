@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   match 'verify', to: 'games#verify', via: :get
   match 'feedback', to: 'games#feedback', via: :get
   match 'specialMode', to: 'games#specialMode', via: :get
+  match 'choosePiece', to: 'games#choosePiece', via: :get
+  match 'setPiece', to: 'games#setPiece', via: :get
+
   
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')

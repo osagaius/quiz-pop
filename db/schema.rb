@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150601213142) do
+ActiveRecord::Schema.define(version: 20150603051148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20150601213142) do
     t.text     "player_2_pieces",  default: [],                 array: true
     t.boolean  "challenge"
     t.boolean  "streak",           default: false
+    t.string   "reward"
   end
 
   create_table "questions", force: :cascade do |t|
