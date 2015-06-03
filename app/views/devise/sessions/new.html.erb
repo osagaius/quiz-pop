@@ -1,7 +1,10 @@
+<%= javascript_include_rpx(user_session_url) %>
 <div class="splash">
-  <h1>Quiz Pop</h1>
-  <button type="button" class="btn btn-info" data-toggle="dropdown" aria-expanded="false">
-    <a href="#" onclick="FB.login()">Play with Facebook</a>
-  </button>
-  <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-expanded="false">Play With Google+</button>
+	<h1>Quiz Pop</h1>
+	<button type="button" class="btn btn-info" data-toggle="dropdown" aria-expanded="false">
+		<%= link_to_rpx "Play with Facebook", user_session_url %>
+	</button>
+	<button type="button" class="btn btn-danger" data-toggle="dropdown" aria-expanded="false">
+		<%= link_to "Play with Google+", user_omniauth_authorize_path(:google_oauth2) %>
+	</button>
 </div>

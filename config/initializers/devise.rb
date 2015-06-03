@@ -13,6 +13,10 @@ Devise.setup do |config|
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
 
   config.authentication_keys = [ :login ]
+
+  require 'omniauth-google-oauth2'
+  config.omniauth :google_oauth2, "245381566908-1cucgb2h8051hlh3g3ihmuod910l2o0s.apps.googleusercontent.com", 
+      "810dZ0LDnz1ypHEM5kfrIokX", { access_type: "offline", approval_prompt: "" }
   
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -260,4 +264,8 @@ config.stretches = Rails.env.test? ? 1 : 10
   # When using omniauth, Devise cannot automatically set Omniauth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+
+  config.rpx_application_name = "quiz-pop"
+  RPXNow.api_key = "e01de5c65311c64915a4907a2bf2f711f50de11a"
+
 end

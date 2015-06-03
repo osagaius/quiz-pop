@@ -19,6 +19,9 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'devise', '~> 3.4.1'
 gem 'randumb'
+gem 'devise_rpx_connectable'
+gem 'omniauth'
+gem 'omniauth-google-oauth2' 
 
 gem 'omniauth-facebook'
 # Use jquery as the JavaScript library
