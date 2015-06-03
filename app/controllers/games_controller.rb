@@ -27,6 +27,11 @@ class GamesController < ApplicationController
 		@game = Game.find(params[:id])
 		@question = Question.first
 		@@question = @question
+		
+		if @game.streak
+			@game.special_mode = true
+			@game.save
+		end
 
 		if player1?(@game)
 			@current_user_pieces = @game.player_1_pieces
@@ -47,6 +52,7 @@ class GamesController < ApplicationController
 				if @game.challenge
 				else
 					add_player_piece(@game)
+					reset_meter(@game)
 				end
 			else
 				increment_meter(@game)
@@ -55,7 +61,7 @@ class GamesController < ApplicationController
 			if @game.special_mode
 				if @game.challenge
 				else
-					@game.special_mode = false
+					reset_meter(@game)
 				end
 			end
 			reset_meter(@game)
@@ -76,15 +82,27 @@ class GamesController < ApplicationController
 		@path = '/games/' + @game.id.to_s
 		@correct = params[:correct]
 		
-		if @correct === 'true'
-			if @game.streak
-				render action: 'special.js.erb'
-			else
-				redirect_to_game(@game)
-			end
-		else			
-			respond_to do |format|
-				format.js
+		puts "current special_mode"
+		puts @game.special_mode
+
+		if @game.special_mode
+			puts "entering special mode"
+			@game.special_mode = false
+			@game.streak = false
+			@game.save
+			redirect_to_game(@game)
+			return
+		else
+			if @correct === 'true'
+				if @game.streak
+					render action: 'special.js.erb'
+				else
+					redirect_to_game(@game)
+				end
+			else			
+				respond_to do |format|
+					format.js
+				end
 			end
 		end
 	end
@@ -93,10 +111,10 @@ class GamesController < ApplicationController
 		@game = Game.find(params[:game_id])
 		if params[:choice] == 'piece'
 			@game.challenge = false
-			@game.save
 		else
 			@game.challenge = true
 		end
+		@game.save
 		redirect_to_game(@game)
 	end
 
@@ -154,8 +172,6 @@ class GamesController < ApplicationController
 		@game.meter += 1
 		if @game.meter >= 3
 			@game.streak = true
-			reset_meter(@game)
-			puts "resetting and setting streak to true"
 		else
 			@game.streak = false
 		end
@@ -164,7 +180,6 @@ class GamesController < ApplicationController
 	end
 	def reset_meter(a_game)
 		@game = Game.find(a_game.id)
-		@game.streak = false
 		@game.meter = 0
 		@game.save
 	end
@@ -192,7 +207,6 @@ class GamesController < ApplicationController
 		else
 			@game.player_2_pieces += [@piece]
 		end
-		@game.special_mode = false
 		@game.save
 	end
 
