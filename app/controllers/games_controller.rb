@@ -1,14 +1,19 @@
 class GamesController < ApplicationController
 	respond_to :html, :json
 
-	CATEGORIES = ['Science', 'Sports', 'Entertainment', 'Geography', 'History', 'Art'].freeze
-
 	def index
 		@games = Game.all
 		@vis_js = 1
 	end
 
 	def create
+		if !(/^www/.match(request.host))
+			puts "request info"
+			puts request
+			redirect_to("#{request.protocol}www.#{request.host_with_port}",
+                  :status => 301)
+			return
+		end
 		@game = Game.new(game_params)
 		@game.turn = current_user.id
 		@game.meter = 0
