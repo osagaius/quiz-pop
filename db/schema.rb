@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20150603073208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "adminpack"
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",              default: "", null: false
@@ -36,14 +35,6 @@ ActiveRecord::Schema.define(version: 20150603073208) do
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "entries", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.boolean  "winner"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "age"
   end
 
   create_table "games", force: :cascade do |t|
