@@ -7,13 +7,7 @@ class GamesController < ApplicationController
 	end
 
 	def create
-		if !(/^www/.match(request.host))
-			puts "request info"
-			puts request
-			redirect_to("#{request.protocol}www.#{request.host_with_port}",
-                  :status => 301)
-			return
-		end
+		
 		@game = Game.new(game_params)
 		@game.turn = current_user.id
 		@game.meter = 0
@@ -26,6 +20,7 @@ class GamesController < ApplicationController
 		if @game.save
 			redirect_to welcome_index_path
 		else
+
 			render 'new'
 		end
 	end
