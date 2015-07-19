@@ -1,0 +1,36 @@
+/* line 1, /Users/osayame/Dropbox/osayame/school/spring_2015/capstone-project-gaius-and-moore/app/assets/stylesheets/welcome.scss */
+.dashboard {
+  text-align: left;
+  margin: 5%;
+}
+
+/* line 7, /Users/osayame/Dropbox/osayame/school/spring_2015/capstone-project-gaius-and-moore/app/assets/stylesheets/welcome.scss */
+.game-list .game-entry {
+  padding: 5px;
+  background-color: #296399;
+  display: inline-block;
+  width: 100%;
+}
+/* line 13, /Users/osayame/Dropbox/osayame/school/spring_2015/capstone-project-gaius-and-moore/app/assets/stylesheets/welcome.scss */
+.game-list .game-entry:hover {
+  list-style-type: none;
+  background-color: #0084FF;
+}
+
+/* line 19, /Users/osayame/Dropbox/osayame/school/spring_2015/capstone-project-gaius-and-moore/app/assets/stylesheets/welcome.scss */
+.navigation {
+  list-style: none;
+  padding: 10px;
+}
+
+/* line 24, /Users/osayame/Dropbox/osayame/school/spring_2015/capstone-project-gaius-and-moore/app/assets/stylesheets/welcome.scss */
+.navigation .btn {
+  width: 100%;
+  text-align: left;
+  margin: 1px;
+}
+
+/* line 30, /Users/osayame/Dropbox/osayame/school/spring_2015/capstone-project-gaius-and-moore/app/assets/stylesheets/welcome.scss */
+#categories-dropdown {
+  display: none;
+}
