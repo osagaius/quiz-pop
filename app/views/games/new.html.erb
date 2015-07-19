@@ -4,10 +4,13 @@
 
 <ul class="users">
 	<% @users.each do |user| %>
-		<% if user.firstname.to_s.length > 1 %>
-			<%= link_to user.get_full_name, games_path(:game => {:player1 => current_user.id, :player2 => user.id}) , :method => :post %>
-			<br/>
-		<% end %>
+	<% if user.firstname.to_s.length > 1 %>
+	<%= form_for :game, url: games_path do |f| %>
+	<%= f.hidden_field :player_2, :value => user.id %>
+	<%= f.submit user.get_full_name, :class=>'btn btn-primary'%>
+	<% end %>
+	<br/>
+	<% end %>
 
 	<% end %>
 </ul>

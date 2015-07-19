@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :games do 
     member do
       get 'updateQuestion'
+      post 'new_game'
     end
   end
   

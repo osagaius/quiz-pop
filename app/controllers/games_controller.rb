@@ -7,8 +7,9 @@ class GamesController < ApplicationController
 	end
 
 	def create
-		
-		@game = Game.new(game_params)
+		@game = Game.new()
+		@game.player1 = current_user.id
+		@game.player2 = params[:game][:player_2]
 		@game.turn = current_user.id
 		@game.meter = 0
 		@game.special_mode = false
