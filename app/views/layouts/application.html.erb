@@ -4,7 +4,8 @@
   <title>QuizPop</title>
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
@@ -90,21 +91,21 @@
   </div>
 
   <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '712396392193089',
-      xfbml      : true,
-      version    : 'v2.2'
-    });
-  };
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '712396392193089',
+        xfbml      : true,
+        version    : 'v2.2'
+      });
+    };
 
-  (function(d, s, id){
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
+    (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
   </script>
 </body>
 
