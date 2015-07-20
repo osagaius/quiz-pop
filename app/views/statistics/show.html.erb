@@ -13,7 +13,7 @@
                         <ul class="nav nav-tabs">
                             <li><a href="#" data-target="#week, #week_help" data-toggle="tab">This Week</a>
                             </li>
-                            <li><a href="#" data-target="#month, #month_help" data-toggle="tab">This Month</a>
+                            <li><a href="#" data-target="#month, #_help" data-toggle="tab">This Month</a>
                             </li>
                             <li class="active"> <a href="#" data-target="#all, #all_help" data-toggle="tab">All Time</a>
                             </li>
@@ -45,72 +45,72 @@
                                 </tr>
                                 <% @count = @count + 1 %>
                                 <% end %>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="tab-pane fade in" id="month">
-                                <table class="table table-bordered table-striped stats-table">
-                                  <thead>
-                                    <tr>
-                                        <th>Rank</th>
-                                        <th>Name</th>
-                                        <th>Number Correct</th>
-                                        <th>Accuracy</th>
-                                    </tr>
-                                </thead><tbody>
-                                <% @count = 1 %>
-                                <% Statistic.month.each do |key, value| %>
-                                <% user = User.find(key) %>
-                                <% if user.firstname.to_s.length > 1 %>
-                                <% @name = user.get_full_name %>
-                                <% else %>
-                                <% @name = user.username %>
-                                <% end %>
-                                <tr data-item-id=<%= "#{user.id}" %> class="item">
-                                    <td><%= @count %></td>
-                                    <td><%= @name %></td>
-                                    <td><%= value[:correct] %></td>
-                                    <td><%= value[:accuracy] %>%</td>
-                                </tr>
-                                <% @count = @count + 1 %>
-                                <% end %>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="tab-pane fade in" id="all">
-                                <table class="table table-bordered table-striped stats-table">
-                                  <thead>
-                                    <tr>
-                                        <th>Rank</th>
-                                        <th>Name</th>
-                                        <th>Number Correct</th>
-                                        <th>Accuracy</th>
-                                    </tr>
-                                </thead><tbody>
-                                <% @count = 1 %>
-                                <% Statistic.all_time.each do |key, value| %>
-                                <% user = User.find(key) %>
-                                <% if user.firstname.to_s.length > 1 %>
-                                <% @name = user.get_full_name %>
-                                <% else %>
-                                <% @name = user.username %>
-                                <% end %>
-                                <tr data-item-id=<%= "#{user.id}" %> class="item">
-                                    <td><%= @count %></td>
-                                    <td><%= @name %></td>
-                                    <td><%= value[:correct] %></td>
-                                    <td><%= value[:accuracy] %>%</td>
-                                </tr>
-                                <% @count = @count + 1 %>
-                                <% end %>
-                                    </tbody>
-                                </table>
-                            </div>
-                    <div class="tab-pane" id="profile">profile tab content</div>
-                </div>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade in" id="month">
+                        <table class="table table-bordered table-striped stats-table">
+                          <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Name</th>
+                                <th>Number Correct</th>
+                                <th>Accuracy</th>
+                            </tr>
+                        </thead><tbody>
+                        <% @count = 1 %>
+                        <% Statistic.month.each do |key, value| %>
+                        <% user = User.find(key) %>
+                        <% if user.firstname.to_s.length > 1 %>
+                        <% @name = user.get_full_name %>
+                        <% else %>
+                        <% @name = user.username %>
+                        <% end %>
+                        <tr data-item-id=<%= "#{user.id}" %> class="item">
+                            <td><%= @count %></td>
+                            <td><%= @name %></td>
+                            <td><%= value[:correct] %></td>
+                            <td><%= value[:accuracy] %>%</td>
+                        </tr>
+                        <% @count = @count + 1 %>
+                        <% end %>
+                    </tbody>
+                </table>
             </div>
-        </div>
+            <div class="tab-pane fade in" id="all">
+                <table class="table table-bordered table-striped stats-table">
+                  <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Name</th>
+                        <th>Number Correct</th>
+                        <th>Accuracy</th>
+                    </tr>
+                </thead><tbody>
+                <% @count = 1 %>
+                <% Statistic.all_time.each do |key, value| %>
+                <% user = User.find(key) %>
+                <% if user.firstname.to_s.length > 1 %>
+                <% @name = user.get_full_name %>
+                <% else %>
+                <% @name = user.username %>
+                <% end %>
+                <tr data-item-id=<%= "#{user.id}" %> class="item">
+                    <td><%= @count %></td>
+                    <td><%= @name %></td>
+                    <td><%= value[:correct] %></td>
+                    <td><%= value[:accuracy] %>%</td>
+                </tr>
+                <% @count = @count + 1 %>
+                <% end %>
+            </tbody>
+        </table>
     </div>
+    <div class="tab-pane" id="profile">profile tab content</div>
+</div>
+</div>
+</div>
+</div>
 
 </div>
 </div>
@@ -122,8 +122,7 @@
                 <h1><span style='font-size: 25px' class='glyphicon glyphicon-user'></span>Your Stats</h1>
             </div>
             <div class="panel panel-body">
-
-
+                <%= render 'personal_stats' %>
             </div>
         </div>
 
