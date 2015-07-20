@@ -1,7 +1,7 @@
 <% Category.all.each do |category| %>
 <h4><%= category.title %></h4>
 <div class="progress">
-  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width: <%= Statistic.user_stats(current_user, category.title) %>>">
+  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width: <%= Statistic.user_stats(current_user, category.title) %>%">
     <%= Statistic.user_stats(current_user, category.title) %>%
   </div>
 </div>

@@ -32,7 +32,6 @@ class Statistic < ActiveRecord::Base
 		else
 			@accuracy = 0
 		end
-		puts '!!!!!!!!!!!!' + @accuracy.to_s
 		@accuracy
 	end
 
