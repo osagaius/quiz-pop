@@ -11,5 +11,6 @@ class StatisticsController < ApplicationController
   # GET /statistics/1.json
   def show
   end
+  
 
 end
