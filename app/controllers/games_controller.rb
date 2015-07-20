@@ -76,6 +76,8 @@ class GamesController < ApplicationController
 			change_turn(@game)
 		end
 
+		Statistic.insert(current_user, @game, @question, @question.correct_answer == @choice)
+
 		respond_to do |format|
 			format.js
 		end
