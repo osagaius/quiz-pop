@@ -22,9 +22,9 @@
         <div class="col-lg-8 col-md-8 col-sm-8" style="text-align: right">
              <%= link_to 'Forfeit', game_path(game), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger" %>
 
-          <a class="btn btn-warning" href="#">
+         <!--  <a class="btn btn-warning" href="#">
             <i class="fa fa-bar-chart pull-left"></i> Stats
-          </a>
+          </a> -->
 
           <% if game.turn == current_user.id %>
             <%= link_to 'Play', game_path(game), :method => :get, :class => "btn btn-success" %>
@@ -56,9 +56,9 @@
         </div>
         <div class="col-lg-8 col-md-8 col-sm-8" style="text-align: right">
           <span>Completed on <%= game.updated_at.to_s(:due_date) %></span>
-          <a class="btn btn-warning" href="#">
+          <!-- <a class="btn btn-warning" href="#">
             <i class="fa fa-bar-chart pull-left"></i> Stats
-          </a>
+          </a> -->
         </div>
 
       </div>
