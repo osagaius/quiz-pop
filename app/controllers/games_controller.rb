@@ -149,9 +149,14 @@ class GamesController < ApplicationController
 			@game = Game.find(params[:game_id])
 			@game.reward = params[:choice]
 			@game.current_category = (Category.find_by title: @game.reward).id
+			@game.challenge_questions = []
 			@game.save
 
 			if @game.challenge
+				3.times do
+					@game.challenge_questions.push (Question.order_by_rand.where(category: @game.current_category).first.id)
+				end
+				@game.save
 				render action: 'challenge_questions.js.erb'				
 			else
 				redirect_to_game(@game)

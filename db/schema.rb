@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150603073208) do
+ActiveRecord::Schema.define(version: 20150721041121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,24 +39,25 @@ ActiveRecord::Schema.define(version: 20150603073208) do
 
   create_table "games", force: :cascade do |t|
     t.boolean  "complete"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.integer  "turn"
     t.integer  "player1"
     t.integer  "player2"
     t.string   "winner"
     t.string   "loser"
-    t.integer  "player_1_score",   default: 0
-    t.integer  "player_2_score",   default: 0
+    t.integer  "player_1_score",      default: 0
+    t.integer  "player_2_score",      default: 0
     t.integer  "current_question"
     t.integer  "current_category"
     t.integer  "meter"
     t.boolean  "special_mode"
-    t.text     "player_1_pieces",  default: [],                 array: true
-    t.text     "player_2_pieces",  default: [],                 array: true
+    t.text     "player_1_pieces",     default: [],                 array: true
+    t.text     "player_2_pieces",     default: [],                 array: true
     t.boolean  "challenge"
-    t.boolean  "streak",           default: false
+    t.boolean  "streak",              default: false
     t.string   "reward"
+    t.integer  "challenge_questions", default: [],                 array: true
   end
 
   create_table "questions", force: :cascade do |t|
@@ -92,6 +93,16 @@ ActiveRecord::Schema.define(version: 20150603073208) do
   end
 
   add_index "rounds", ["game_id"], name: "index_rounds_on_game_id", using: :btree
+
+  create_table "statistics", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.string   "category"
+    t.boolean  "correct"
+    t.string   "question"
+    t.integer  "game_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
