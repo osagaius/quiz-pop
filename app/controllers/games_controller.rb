@@ -153,8 +153,8 @@ class GamesController < ApplicationController
 			@game.save
 
 			if @game.challenge
-				3.times do
-					@game.challenge_questions.push (Question.order_by_rand.where(category: @game.current_category).first.id)
+				Question.where(category: @game.current_category).shuffle[0..4].each do |question|
+					@game.challenge_questions.push(question.id)
 				end
 				@game.save
 				render action: 'challenge_questions.js.erb'				
