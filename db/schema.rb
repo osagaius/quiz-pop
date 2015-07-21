@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150721042919) do
+ActiveRecord::Schema.define(version: 20150721045557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,26 +39,28 @@ ActiveRecord::Schema.define(version: 20150721042919) do
 
   create_table "games", force: :cascade do |t|
     t.boolean  "complete"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.integer  "turn"
     t.integer  "player1"
     t.integer  "player2"
     t.string   "winner"
     t.string   "loser"
-    t.integer  "player_1_score",      default: 0
-    t.integer  "player_2_score",      default: 0
+    t.integer  "player_1_score",           default: 0
+    t.integer  "player_2_score",           default: 0
     t.integer  "current_question"
     t.integer  "current_category"
     t.integer  "meter"
     t.boolean  "special_mode"
-    t.text     "player_1_pieces",     default: [],                 array: true
-    t.text     "player_2_pieces",     default: [],                 array: true
+    t.text     "player_1_pieces",          default: [],                 array: true
+    t.text     "player_2_pieces",          default: [],                 array: true
     t.boolean  "challenge"
-    t.boolean  "streak",              default: false
+    t.boolean  "streak",                   default: false
     t.string   "reward"
-    t.integer  "challenge_questions", default: [],                 array: true
+    t.integer  "challenge_questions",      default: [],                 array: true
     t.integer  "challenge_count"
+    t.integer  "player_1_challenge_score"
+    t.integer  "player_2_challenge_score"
   end
 
   create_table "questions", force: :cascade do |t|

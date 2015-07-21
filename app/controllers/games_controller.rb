@@ -168,7 +168,6 @@ class GamesController < ApplicationController
 			@category = params[:category]
 			@game.current_category = params[:category]
 
-
 			if @game.save
 				respond_to do |format|
 					format.js { render :partial => "question" }
