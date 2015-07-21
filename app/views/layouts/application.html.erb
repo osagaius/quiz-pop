@@ -13,6 +13,9 @@
   <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
 </head>
 <body id="home">
+
+
+
   <div class="navbar navbar-default navbar-fixed-top navbar-transparent">
     <div class="container">
       <div class="navbar-header">
@@ -80,33 +83,14 @@
   </div>
 
   <div id="content">
-    <% if notice %>
-    <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-    <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
+
 
     <%= yield %>
   </div>
+  
+  <div id="modals" style="position:relative">
 
-  <script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '712396392193089',
-        xfbml      : true,
-        version    : 'v2.2'
-      });
-    };
-
-    (function(d, s, id){
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>
+  </div>
 </body>
 
 </html>

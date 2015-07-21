@@ -1,0 +1,6 @@
+if ( $( "#myModal" ).length ) {
+	$( "#myModal" ).remove();
+}
+$( "body" ).append( '<%= j render ("challenge_error_modal") %>');
+
+$('#myModal').modal('show')

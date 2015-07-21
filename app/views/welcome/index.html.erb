@@ -10,7 +10,13 @@
     <!-- Display list of uncompleted games -->
     <% @incomplete.each do |game| %>
     
-    
+    <% user = User.find(game.player2) %>
+    <% if user.firstname.to_s.length > 1 %>
+    <% @name = user.firstname %>
+    <% else %>
+    <% @name = user.username %>
+    <% end %>
+
     <div class="game-list">
       <div class="game-entry">
         <div class="col-lg-4 col-md-4 col-sm-4">
@@ -18,21 +24,21 @@
             <i class="fa fa-square-o fa-stack-2x"></i>
             <i class="fa fa-user fa-stack-1x fa-inverse"></i>
           </span>
-          You vs  . <%= User.find(game.player2).firstname %> (<%= game.player_1_score %> - <%=game.player_2_score %>)
+          You vs  . <%= @name %> (<%= game.player_1_score %> - <%=game.player_2_score %>)
         </div>
         <div class="col-lg-8 col-md-8 col-sm-8" style="text-align: right">
-             <%= link_to 'Forfeit', game_path(game), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger" %>
+         <%= link_to 'Forfeit', game_path(game), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger" %>
 
          <!--  <a class="btn btn-warning" href="#">
             <i class="fa fa-bar-chart pull-left"></i> Stats
           </a> -->
 
           <% if game.turn == current_user.id %>
-            <%= link_to 'Play', game_path(game), :method => :get, :class => "btn btn-success" %>
+          <%= link_to 'Play', game_path(game), :method => :get, :class => "btn btn-success" %>
           <% else %>
-            <a class="btn btn-default" href="#" aria-disabled="true">
-              <i class="fa fa-clock-o pull-left" disabled></i> Opponents Turn
-            </a>
+          <a class="btn btn-default" href="#" aria-disabled="true">
+            <i class="fa fa-clock-o pull-left" disabled></i> Opponents Turn
+          </a>
           <% end %>
         </div>
 
@@ -46,14 +52,14 @@
     <% @complete.each do |game| %>
 
     <div class="game-list">
-      
+
       <div class="game-entry">
         <div class="col-lg-4 col-md-4 col-sm-4">
           <span class="fa-stack fa-lg">
             <i class="fa fa-square-o fa-stack-2x"></i>
             <i class="fa fa-user fa-stack-1x fa-inverse"></i>
           </span>
-          You vs  . <%= User.find(game.player2).firstname %> (<%= game.player_1_score %> - <%=game.player_2_score %>)
+          You vs  . <%= @name %> (<%= game.player_1_score %> - <%=game.player_2_score %>)
         </div>
         <div class="col-lg-8 col-md-8 col-sm-8" style="text-align: right">
           <span>Completed on <%= game.updated_at.to_s(:due_date) %></span>

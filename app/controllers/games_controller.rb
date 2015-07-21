@@ -128,7 +128,14 @@ class GamesController < ApplicationController
 				render action: 'choosePiece.js.erb'
 				return
 			else
-				@game.challenge = true
+				if @game.player_1_pieces.empty? || @game.player_2_pieces.empty?
+					render action: 'challenge_error.js.erb'
+				else
+					@game.challenge = true
+					@game.save
+					render action: 'challenge_piece_choose.js.erb'					
+				end
+				return
 			end
 			@game.save
 			redirect_to_game(@game)
@@ -141,9 +148,14 @@ class GamesController < ApplicationController
 		def setPiece
 			@game = Game.find(params[:game_id])
 			@game.reward = params[:choice]
-			@game.current_category = Category.find_by title: @game.reward
+			@game.current_category = (Category.find_by title: @game.reward).id
 			@game.save
-			redirect_to_game(@game)
+
+			if @game.challenge
+				render action: 'challenge_questions.js.erb'				
+			else
+				redirect_to_game(@game)
+			end
 		end
 
 		def updateQuestion

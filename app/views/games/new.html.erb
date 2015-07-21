@@ -5,12 +5,19 @@
 <ul class="users">
 	<% @users.each do |user| %>
 	<% if user.firstname.to_s.length > 1 %>
+	<% @name = user.get_full_name %>
+	<% else %>
+	<% @name = user.username %>
+	<% end %>
+
+	<% if user.id != current_user.id %>
 	<%= form_for :game, url: games_path do |f| %>
 	<%= f.hidden_field :player_2, :value => user.id %>
-	<%= f.submit user.get_full_name, :class=>'btn btn-primary'%>
+	<%= f.submit @name, :class=>'btn btn-primary'%>
+	<% end %>
+
 	<% end %>
 	<br/>
-	<% end %>
 
 	<% end %>
 </ul>
