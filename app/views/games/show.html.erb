@@ -11,83 +11,93 @@
     <div class="row">
       <div class="col-sm-3">
         <% if @current_user_pieces.include?('History') %>
-          <%= image_tag("History-green.png") %>
+        <%= image_tag("History-green.png") %>
         <% else %>
-          <%= image_tag("History-grey.png") %>
+        <%= image_tag("History-grey.png") %>
         <% end %>
 
         <% if @current_user_pieces.include?('Entertainment') %>
-          <%= image_tag("Entertainment-green.png") %>
+        <%= image_tag("Entertainment-green.png") %>
         <% else %>
-          <%= image_tag("Entertainment-grey.png") %>
+        <%= image_tag("Entertainment-grey.png") %>
         <% end %>
 
         <% if @current_user_pieces.include?('Sports') %>
-          <%= image_tag("Sports-green.png") %>
+        <%= image_tag("Sports-green.png") %>
         <% else %>
-          <%= image_tag("Sports-grey.png") %>
+        <%= image_tag("Sports-grey.png") %>
         <% end %>
         <br>
         <br>
         <% if @current_user_pieces.include?('Science') %>
-          <%= image_tag("Science-green.png") %>
+        <%= image_tag("Science-green.png") %>
         <% else %>
-          <%= image_tag("Science-grey.png") %>
+        <%= image_tag("Science-grey.png") %>
         <% end %>
 
         <% if @current_user_pieces.include?('Geography') %>
-          <%= image_tag("Geography-green.png") %>
+        <%= image_tag("Geography-green.png") %>
         <% else %>
-          <%= image_tag("Geography-grey.png") %>
+        <%= image_tag("Geography-grey.png") %>
         <% end %>
 
         <% if @current_user_pieces.include?('Art') %>
-          <%= image_tag("Art-green.png") %>
+        <%= image_tag("Art-green.png") %>
         <% else %>
-          <%= image_tag("Art-grey.png") %>
+        <%= image_tag("Art-grey.png") %>
         <% end %>
       </div>
       <div class="col-sm-6" id="main-panel">
+
+        <% if @game.challenge %>
+        <h2>Challenge Time!</h2>
+        <div id="wheel">
+          <%= render 'challenge_question' %>
+        </div>
+        <% else %>
+
         <div class="">
           <%= render 'spinner' %>
         </div>
+        <% end %>
+
       </div>
       <div class="col-sm-3">
         <% if @opponent_pieces.include?('History') %>
-          <%= image_tag("History-green.png") %>
+        <%= image_tag("History-green.png") %>
         <% else %>
-          <%= image_tag("History-grey.png") %>
+        <%= image_tag("History-grey.png") %>
         <% end %>
 
         <% if @opponent_pieces.include?('Entertainment') %>
-          <%= image_tag("Entertainment-green.png") %>
+        <%= image_tag("Entertainment-green.png") %>
         <% else %>
-          <%= image_tag("Entertainment-grey.png") %>
+        <%= image_tag("Entertainment-grey.png") %>
         <% end %>
 
         <% if @opponent_pieces.include?('Sports') %>
-          <%= image_tag("Sports-green.png") %>
+        <%= image_tag("Sports-green.png") %>
         <% else %>
-          <%= image_tag("Sports-grey.png") %>
+        <%= image_tag("Sports-grey.png") %>
         <% end %>
         <br>
         <br>
         <% if @opponent_pieces.include?('Science') %>
-          <%= image_tag("Science-green.png") %>
+        <%= image_tag("Science-green.png") %>
         <% else %>
-          <%= image_tag("Science-grey.png") %>
+        <%= image_tag("Science-grey.png") %>
         <% end %>
 
         <% if @opponent_pieces.include?('Geography') %>
-          <%= image_tag("Geography-green.png") %>
+        <%= image_tag("Geography-green.png") %>
         <% else %>
-          <%= image_tag("Geography-grey.png") %>
+        <%= image_tag("Geography-grey.png") %>
         <% end %>
 
         <% if @opponent_pieces.include?('Art') %>
-          <%= image_tag("Art-green.png") %>
+        <%= image_tag("Art-green.png") %>
         <% else %>
-          <%= image_tag("Art-grey.png") %>
+        <%= image_tag("Art-grey.png") %>
         <% end %>
       </div>
     </div>

@@ -16,3 +16,4 @@
 //= require_tree ./public
 //= require statistics.js
 
+alert('blah')

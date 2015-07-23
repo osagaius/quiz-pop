@@ -17,6 +17,7 @@ class GamesController < ApplicationController
 		@game.meter = 0
 		@game.streak = false
 		@game.complete = false
+		@game.challenge_count = 0
 
 		if @game.save
 			redirect_to welcome_index_path
@@ -28,6 +29,11 @@ class GamesController < ApplicationController
 
 	def show
 		@game = Game.find(params[:id])
+		# if @game.challenge
+		# 	render action: 'challenge_questions.js.erb'
+		# 	return
+		# end
+
 		if current_user.id != @game.turn
 			redirect_to welcome_index_path
 			return
@@ -58,6 +64,31 @@ class GamesController < ApplicationController
 		if @question.correct_answer == @choice
 			if @game.special_mode
 				if @game.challenge
+
+					return if @game.challenge_over?
+
+					increment_challenge_score(@game)
+
+					if (@game.challenge_count + 1) > 2
+						set_challenge_completed(@game)
+						if challenge_completed?(@game)
+							if @game.challenge_over?
+								set_challenge_winner(@game)
+								render action: 'challenge_completed.js.erb'
+								@game.end_challenge
+								return
+							end
+						else
+							change_turn(@game)
+						end
+						redirect_to_home
+						return
+					else
+						@game.challenge_count+= 1
+						@game.save
+						render action: 'challenge_questions.js.erb'
+						return				
+					end
 				else
 					add_player_piece(@game)
 					reset_meter(@game)
@@ -68,6 +99,29 @@ class GamesController < ApplicationController
 		else
 			if @game.special_mode
 				if @game.challenge
+
+					return if @game.challenge_over?
+
+					if (@game.challenge_count + 1) > 2
+						et_challenge_completed(@game)
+						if challenge_completed?(@game)
+							if @game.challenge_over?
+								set_challenge_winner(@game)
+								render action: 'challenge_completed.js.erb'
+								@game.end_challenge
+								return
+							end
+						else
+							change_turn(@game)
+						end
+						redirect_to_home
+						return
+					else
+						@game.challenge_count+= 1
+						@game.save
+						render action: 'challenge_questions.js.erb'
+						return				
+					end
 				else
 					reset_meter(@game)
 				end
@@ -150,6 +204,7 @@ class GamesController < ApplicationController
 			@game.reward = params[:choice]
 			@game.current_category = (Category.find_by title: @game.reward).id
 			@game.challenge_questions = []
+			@game.special_mode = true
 			@game.save
 
 			if @game.challenge
@@ -211,6 +266,15 @@ class GamesController < ApplicationController
 			redirect_to welcome_index_path
 		end
 
+		def challenge_completed?(a_game)
+			@game = Game.find(a_game.id)
+			if @game.player1 == current_user.id
+				@game.player_1_challenge_completed 
+			else
+				@game.player_2_challenge_completed
+			end
+		end
+
 		private
 
 		def increment_meter(a_game)
@@ -224,11 +288,25 @@ class GamesController < ApplicationController
 
 			@game.save
 		end
+
+		def increment_challenge_score(a_game)
+			@game = Game.find(a_game.id)
+			if @game.player1 == current_user.id
+				puts '!!!!!!!!!!!!!! incrementing player1'
+				@game.player_1_challenge_score += 1
+			else
+				puts '!!!!!!!!!!!!!! incrementing player2'
+				@game.player_2_challenge_score += 1
+			end
+			@game.save
+		end
+
 		def reset_meter(a_game)
 			@game = Game.find(a_game.id)
 			@game.meter = 0
 			@game.save
 		end
+
 		def change_turn(a_game)
 			@game = Game.find(a_game.id)
 			if @game.player1 == current_user.id
@@ -236,7 +314,35 @@ class GamesController < ApplicationController
 			else
 				@game.turn = @game.player1
 			end
+			@game.challenge_count = 0
 			@game.save
+		end
+
+		def set_challenge_completed(a_game)
+			@game = Game.find(a_game.id)
+			if @game.player1 == current_user.id
+				@game.player_1_challenge_completed = true
+			else
+				@game.player_2_challenge_completed = true
+			end
+			@game.save
+		end
+
+		def set_challenge_winner(a_game)
+			@game = Game.find(a_game.id)
+			if @game.player_1_challenge_score > @game.player_2_challenge_score
+				@game.player_1_pieces += [@game.reward]
+				@game.player_2_pieces -= [@game.reward]
+			elsif @game.player_1_challenge_score < @game.player_2_challenge_score
+				@game.player_2_pieces += [@game.reward]	
+				@game.player_2_pieces -= [@game.reward]								
+			end
+			@game.save
+		end
+
+		def challenge_completed?(a_game)
+			@game = Game.find(a_game.id)
+			@game.player_1_challenge_completed && @game.player_2_challenge_completed
 		end
 
 		def redirect_to_game(game)

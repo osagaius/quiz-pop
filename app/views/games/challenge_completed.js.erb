@@ -1,0 +1,10 @@
+if ( $( "#challengeCompletedModal" ).length ) {
+	$( "#challengeCompletedModal" ).remove();
+}
+$( "body" ).append( '<%= j render ("challenge_completed_modal") %>');
+
+$('#challengeCompletedModal').modal('show')
+
+$('#challengeCompletedModal').on('hidden.bs.modal', function (e) {
+  location.reload();
+})
