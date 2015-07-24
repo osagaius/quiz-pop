@@ -1,0 +1,47 @@
+<%= form_tag charges_path do %>
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<div class="container">
+	<div class="jumbotron">
+		<h2>How many coins do you want to buy?</h2>
+		<button class="btn btn-lg btn-success customButton">Buy 1 Coin - $0.10
+			<input type="hidden" id="amount" value=0.1>
+		</button>
+		<button class="btn btn-lg btn-success customButton">Buy 10 Coins - $1.00
+			<input type="hidden" id="amount" value=1>
+		</button>
+		<button class="btn btn-lg btn-success customButton">Buy 50 Coins - $5.00
+			<input type="hidden" id="amount" value=5>
+		</button>
+		<button class="btn btn-lg btn-success customButton">Buy 200 Coins - $20.00
+			<input type="hidden" id="amount" value=20>
+		</button>	
+	</div>
+</div>
+
+<script>
+	var handler = StripeCheckout.configure({
+		key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+		token: function(token) {
+      // Use the token to create the charge with a server-side script.
+      // You can access the token ID with `token.id`
+  }
+});
+
+	$('.customButton').on('click', function(e) {
+		var price = $(this).children('#amount').val();
+		console.log('price ' + price);
+    // Open Checkout with further options
+    handler.open({
+    	name: 'Buy More Coins',
+    	description: '',
+    	amount: price * 100
+    });
+    e.preventDefault();
+});
+
+  // Close Checkout on page navigation
+  $(window).on('popstate', function() {
+  	handler.close();
+  });
+</script>
+<% end %>

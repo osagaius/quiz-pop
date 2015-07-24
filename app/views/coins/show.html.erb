@@ -1,0 +1,10 @@
+<div class="container">
+	<div class="jumbotron text-center">
+		<h2>You have <%= current_user.coins.presence || 0 %> coins.</h2>
+		<p>You earn coins by winning games, and can use them to unlock features.</p>
+		<hr>
+		<br>
+		<p><a class="btn btn-primary btn-lg" href="/charges">Buy More Coins</a></p>
+	</div>
+
+</div>

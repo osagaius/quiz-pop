@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :coins
+
+  match 'buy-coins', to: 'coins#buy', via: :get
+
+  resources :charges
+
   resources :achievements
 
   devise_for :admins

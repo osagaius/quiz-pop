@@ -9,8 +9,10 @@ gem 'rails', '4.2.0'
 gem 'pg'
 
 group :production do
-  gem 'rails_12factor'
+	gem 'rails_12factor'
 end
+
+gem 'stripe', git: 'https://github.com/stripe/stripe-ruby'
 
 gem "twitter-bootstrap-rails"
 
