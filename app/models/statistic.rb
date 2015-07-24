@@ -35,6 +35,14 @@ class Statistic < ActiveRecord::Base
 		@accuracy.round(2)
 	end
 
+	def self.user_total_count(user)
+		Statistic.where(["user_id = ?", user.id]).count
+	end
+
+	def self.user_correct_count(user)
+		Statistic.where(["user_id = ? and correct = ?", user.id, true]).count
+	end
+
 	def self.stats_by_period(period)
 		time = {"week" => 1.week.ago.utc, "month" => 1.month.ago.utc, "none" => 5000.month.ago.utc}
 		@stats = Hash.new

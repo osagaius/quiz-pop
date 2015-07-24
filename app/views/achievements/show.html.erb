@@ -1,3 +1,4 @@
+<h1>Achievements</h1>
 <div class="container">
 	<h3>Quiz Pop is no fun without trophies. Here are yours...</h3>
 	<div class="list-group">
@@ -6,8 +7,13 @@
 			<h4 class="list-group-item-heading">Welcome!</h4>
 			<p class="list-group-item-text">You get this one just for joining the party!</p>
 		</div>
+
+		<% Achievement.get_user_achievements(current_user.id).each do |achievement| %>
+		<div href="#" class="well well-lg" style="padding:20px">
+			<i class="fa fa-beer pull-left fa-4x"></i>
+			<h4 class="list-group-item-heading"> <%= achievement %> </h4>
+			<p></p>
+		</div>
+		<% end %>
 	</div>
-
-	
-
 </div>

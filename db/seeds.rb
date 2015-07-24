@@ -82,12 +82,12 @@
 #     password_confirmation: password)
 # end
 
-Achievement.create!(title: "Registered")
-Achievement.create!(title: "15 Questions")
-Achievement.create!(title: "10 Correct")
-Achievement.create!(title: "30 Correct")
-Achievement.create!(title: "Won 1 Game")
-Achievement.create!(title: "Won 10 Games")
+# Achievement.create!(title: "Registered")
+# Achievement.create!(title: "15 Questions")
+# Achievement.create!(title: "10 Correct")
+# Achievement.create!(title: "30 Correct")
+# Achievement.create!(title: "Won 1 Game")
+# Achievement.create!(title: "Won 10 Games")
 
 
 
