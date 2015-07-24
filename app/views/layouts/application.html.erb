@@ -8,6 +8,7 @@
 
   <%= javascript_include_tag 'application' %>
   <%= javascript_include_tag 'timer' %>
+  <%= javascript_include_tag 'welcome' %>
   <%= csrf_meta_tags %>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="//bootswatch.com/superhero/bootstrap.min.css"/>
@@ -21,18 +22,32 @@
     <div class="container">
       <div class="navbar-header">
         <a href="/" class="navbar-brand">QuizPop</a>
-        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
       </div>
-      <div class="navbar-collapse collapse" id="navbar-main">
-        <ul class="nav navbar-nav">
-          <!-- main nav -->
-        </ul>
 
+      <div class="navbar-form navbar-left">
+        <a class="btn btn-sm btn-warning" href="/statistics/show">
+          <i class="fa fa-bar-chart fa-2x pull-left"></i> Stats
+        </a>
+        &nbsp; &nbsp; &nbsp;
+        <li class="dropdown" style="display: inline-block;">
+          <a href="#demo4" class="btn btn-sm btn-success" data-toggle="collapse" data-parent="#MainMenu"> <i class="fa fa-question fa-2x pull-left"></i>Submit Question</a>
+          <ul class="dropdown-menu" id="demo4">
+            <li><a class="btn btn-md btn-default" href="/categories/1">Entertainment</a></li>
+            <li><a class="btn btn-md btn-primary" href="/categories/2">Art</a></li>
+            <li><a class="btn btn-md btn-default" href="/categories/3">History</a></li>
+            <li><a class="btn btn-md btn-primary" href="/categories/4">Science</a></li>
+            <li><a class="btn btn-md btn-default" href="/categories/5">Geography</a></li>
+            <li><a class="btn btn-md btn-success" href="/categories/6">Sports</a></li>
+          </ul>
+        </li>
+
+        &nbsp; &nbsp; &nbsp;
+        <a class="btn btn-sm btn-default" href="/achievements/show">
+          <i class="fa fa-star-half-o fa-2x pull-left"></i> Achievements
+        </a>
+      </div>
+
+      <div class="navbar-collapse collapse" id="navbar-main">
         <% if user_signed_in? %>
         <ul class="nav navbar-nav navbar-right">
           <li>Logged in as <strong><%= current_user.username %></strong></li>

@@ -9,7 +9,6 @@ class Statistic < ActiveRecord::Base
 		@stat.question = question.id
 		@stat.game_id = game.id
 		@stat.save
-		puts
 	end
 
 	def self.all_time
