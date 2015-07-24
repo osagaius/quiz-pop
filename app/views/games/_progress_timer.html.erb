@@ -1,0 +1,14 @@
+<div id="progressTimer"></div>
+
+<script>
+	$("#progressTimer").progressTimer({
+		timeLimit: 30,
+		warningThreshold: 5,
+		baseStyle: 'progress-bar-warning',
+		warningStyle: 'progress-bar-danger',
+		completeStyle: 'progress-bar-info',
+		onFinish: function() {
+			$("#question").submit();
+		}
+	});	
+</script>

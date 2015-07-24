@@ -48,8 +48,11 @@
         <% end %>
       </div>
       <div class="col-sm-6" id="main-panel">
-
-        <% if @game.challenge %>
+        <% if @game.special_mode %>
+        <div id="wheel">
+          <%= render 'question' %>
+        </div>
+        <% elsif @game.challenge %>
         <h2>Challenge Time!</h2>
         <div id="wheel">
           <%= render 'challenge_question' %>

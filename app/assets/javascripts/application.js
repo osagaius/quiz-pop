@@ -13,7 +13,4 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require_tree ./public
-//= require statistics.js
-
-alert('blah')
+//= require_tree .
