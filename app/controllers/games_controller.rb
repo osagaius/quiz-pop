@@ -18,6 +18,9 @@ class GamesController < ApplicationController
 		@game.streak = false
 		@game.complete = false
 		@game.challenge_count = 0
+		@game.player_1_challenge_score = 0
+		@game.player_2_challenge_score = 0
+
 
 		if @game.save
 			redirect_to welcome_index_path
@@ -296,7 +299,7 @@ class GamesController < ApplicationController
 				@game.player_1_challenge_score += 1
 			else
 				puts '!!!!!!!!!!!!!! incrementing player2'
-				@game.player_2_challenge_score += 1
+				@game.player_1_challenge_score += 1
 			end
 			@game.save
 		end
