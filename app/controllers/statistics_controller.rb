@@ -4,7 +4,6 @@ class StatisticsController < ApplicationController
   # GET /statistics.json
   def index
     @statistics = Statistic.all
-    @leaders = Statistic.fin
   end
 
   # GET /statistics/1
