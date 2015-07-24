@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   resources :coins
 
-  match 'buy-coins', to: 'coins#buy', via: :get
+  match 'buy-coins', to: 'charges#new', via: :get
 
-  resources :charges
+  resources :charges 
 
   resources :achievements
 
