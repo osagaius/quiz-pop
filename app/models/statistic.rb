@@ -28,11 +28,12 @@ class Statistic < ActiveRecord::Base
 		@correct = Statistic.where(["user_id = ? and correct = ? and category = ?", user.id, true, category]).count
 
 		if @correct != 0 
-			@accuracy = (@correct/Statistic.where({user_id: user.id, category: category}).count) * 100
+			@total = Statistic.where({user_id: user.id, category: category}).count
+			@accuracy = @correct.to_f/@total.to_f * 100
 		else
 			@accuracy = 0
 		end
-		@accuracy
+		@accuracy.round(2)
 	end
 
 	def self.stats_by_period(period)
@@ -42,14 +43,15 @@ class Statistic < ActiveRecord::Base
 			id = user.id
 			@correct = Statistic.where(["user_id = ? and correct = ? and updated_at >= ?", user.id, true, time[period]]).count
 
-			if @correct != 0 
-				@accuracy = (@correct/Statistic.where({user_id: user.id}).count) * 100
+			if @correct != 0
+				@total = Statistic.where({user_id: user.id}).count
+				@accuracy = @correct.to_f/@total.to_f * 100
 			else
 				@accuracy = 0
 			end
 
 			if @correct > 0
-				@stats[id] = {correct: @correct, accuracy: @accuracy}
+				@stats[id] = {correct: @correct, accuracy: @accuracy.round(2), total: @total}
 			end
 		end
 		@stats.sort_by { |k,v| v[:accuracy] }.reverse
